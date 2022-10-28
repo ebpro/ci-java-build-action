@@ -29,10 +29,10 @@ runs:
       # it uses env variables from github secrets for the credentials
       # to github, dockerhub and sonar.
       - name: Build and test with Maven in docker
-        run: mvn.sh clean verify
+        run: ${{ github.action_path }}/mvn.sh clean verify
         shell: bash
       - name: Deploy Maven Artifacts
-        run: mvn.sh deploy
+        run: ${{ github.action_path }}/mvn.sh deploy
         shell: bash
       - name: Notify dedicated teams channel of Success
         uses: dragos-cojocari/ms-teams-notification@v1.0.0
