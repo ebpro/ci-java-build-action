@@ -5,6 +5,8 @@ CURRENT=$(pwd)
 echo SCRIPT_DIR=$SCRIPT_DIR
 echo PWD=$CURRENT
 
+
+# mount the gh action directory in the container
 docker run \
           --env GITHUBLOGIN=$GITHUBLOGIN \
           --env GITHUBPASSWORD=$GITHUBPASSWORD \
@@ -12,7 +14,7 @@ docker run \
           --mount type=bind,source=${HOME}/.ssh,target=/home/user/.ssh \
           --mount type=bind,source=${HOME}/.gitconfig,target=/home/user/.gitconfig,readonly \
           --mount type=bind,source="$(pwd)",target=/usr/src/mymaven \
-          --mount type=bind,source=${SCRIPT_DIR},target=/usr/local/ci-java-build-action/ \ # mount the gh action directory in the container
+          --mount type=bind,source=${SCRIPT_DIR},target=/usr/local/ci-java-build-action/ \ 
           --workdir /usr/src/mymaven \
           --rm \
           --env PUID=`id -u` -e PGID=`id -g` \
