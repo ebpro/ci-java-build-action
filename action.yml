@@ -39,7 +39,7 @@ runs:
         if: ${{ success() }}
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ inputs.MSTEAMS_WEBHOOK }}
+          ms-teams-webhook-uri: ${{ env.MSTEAMS_WEBHOOK }}
           notification-summary: Build and Deploy success.
           notification-color: 28a745
           timezone: Europe/Paris
@@ -48,7 +48,7 @@ runs:
         if: ${{ failure() }}
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ inputs.MSTEAMS_WEBHOOK }}
+          ms-teams-webhook-uri: ${{ env.MSTEAMS_WEBHOOK }}
           notification-summary: Build and Deploy failure.
           notification-color: dc3545
           timezone: Europe/Paris
