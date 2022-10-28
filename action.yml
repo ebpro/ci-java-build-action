@@ -1,5 +1,25 @@
 name: 'Java CI Build'
-description: 'Build a Java CI project with maven and Docker' 
+description: 'Build a Java CI project with maven and Docker'
+inputs:
+   GITHUBLOGIN:
+    description: 'A Github login'
+    required: true
+   GITHUBPASSWORD:
+    description: 'A Github PAT'
+    required: true
+   DOCKER_USERNAME:
+    description: 'A Docker username'
+    required: true
+   DOCKER_PASSWORD:
+    description: 'A Docker token'
+    required: true
+   SONAR_URL:
+    description: 'A sonar URL'
+    required: true
+   SONAR_TOKEN:
+    description: 'A sonar token'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -17,7 +37,7 @@ runs:
         if: ${{ success() }}
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ secrets.MSTEAMS_WEBHOOK }}
+          ms-teams-webhook-uri: ${{ input.MSTEAMS_WEBHOOK }}
           notification-summary: Build and Deploy success.
           notification-color: 28a745
           timezone: Europe/Paris
@@ -26,7 +46,7 @@ runs:
         if: ${{ failure() }}
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ secrets.MSTEAMS_WEBHOOK }}
+          ms-teams-webhook-uri: ${{ input.MSTEAMS_WEBHOOK }}
           notification-summary: Build and Deploy failure.
           notification-color: dc3545
           timezone: Europe/Paris
