@@ -12,9 +12,10 @@ docker run \
           --mount type=bind,source=${HOME}/.ssh,target=/home/user/.ssh \
           --mount type=bind,source=${HOME}/.gitconfig,target=/home/user/.gitconfig,readonly \
           --mount type=bind,source="$(pwd)",target=/usr/src/mymaven \
+          --mount type=bind,source=${SCRIPT_DIR},target=/usr/local/ci-java-build-action/ \ # mount the gh action directory in the container
           --workdir /usr/src/mymaven \
           --rm \
           --env PUID=`id -u` -e PGID=`id -g` \
           --env MAVEN_CONFIG=/var/maven/.m2 \
           $MAVEN_IMAGE \
-          runuser --user user --group user -- mvn -B -e -T 1C -Duser.home=/var/maven --settings /usr/src/mymaven/CI_Java/ci-settings.xml "$@"
+          runuser --user user --group user -- mvn -B -e -T 1C -Duser.home=/var/maven --settings /usr/local/ci-java-build-action/ci-settings.xml "$@"
