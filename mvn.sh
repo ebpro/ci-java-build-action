@@ -1,9 +1,9 @@
 #!/bin/bash
 export MAVEN_IMAGE=brunoe/maven:3.8.6-eclipse-temurin-17
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
+CURRENT=$(pwd)
 echo SCRIPT_DIR=$SCRIPT_DIR
-echo PWD=$(pwd)
+echo PWD=$CURRENT
 
 docker run \
           --env GITHUBLOGIN=$GITHUBLOGIN \
